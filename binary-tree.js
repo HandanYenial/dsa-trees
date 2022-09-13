@@ -64,6 +64,20 @@ class BinaryTree {
    * The path doesn't need to start at the root, but you can't visit a node more than once. */
 
   maxSum() {
+    let result = 0; //set result to 0
+
+    function maxSumHelper(node){
+      if(node === null){ //if the node is null, return 0
+        return 0;
+      }
+      const leftSum = maxSumHelper(node.left); //recurse on the left child
+      const rightSum = maxSumHelper(node.right); //recurse on the right child
+      result = Math.max(result , node.val + leftSum + rightSum);
+      return Math.max(0 , leftSum + node.val, rightSum + node.val); //return the maximum of the left and right child + node value
+    }
+
+    maxSumHelper(this.root); //call maxSumHelper on the root
+    return result; 
 
   }
 
@@ -71,38 +85,32 @@ class BinaryTree {
    * which is larger than lowerBound. Return null if no such value exists. */
 
   nextLarger(lowerBound) {
+    if(!this.root){
+      return 0;
+    }
+    //We'll use BFS : breadth first search
+    let queue = [this.root]; //create a queue and add the root to it
+    let closest = null; //set closest to null
 
+    while(queue.length > 0){ //while the queue is not empty
+      let currentNode = queue.shift(); //remove the first element from the queue
+      let currentVal = currentNode.val; //set currentVal to the value of the current node
+      let higherThanLowerBound = currentVal > lowerBound; //set higherThanLowerBound to true if the currentVal is greater than the lowerBound
+      let shouldReassignClosest = currentVal < closest || closest === null; //set shouldReassignClosest to true if the currentVal is less than closest or closest is null
+
+      if(higherThanLowerBound && shouldReassignClosest){ //if higherThanLowerBound and shouldReassignClosest are true
+        closest = currentVal;
+      }
+      if (currentNode.left){
+        queue.push(currentNode.left);
+      }
+      if (currentNode.right){
+        queue.push(currentNode.right);
+      }
+    return closest;
   }
-
-  /** Further study!
-   * areCousins(node1, node2): determine whether two nodes are cousins
-   * (i.e. are at the same level but have different parents. ) */
-
-  areCousins(node1, node2) {
-
-  }
-
-  /** Further study!
-   * serialize(tree): serialize the BinaryTree object tree into a string. */
-
-  static serialize() {
-
-  }
-
-  /** Further study!
-   * deserialize(stringTree): deserialize stringTree into a BinaryTree object. */
-
-  static deserialize() {
-
-  }
-
-  /** Further study!
-   * lowestCommonAncestor(node1, node2): find the lowest common ancestor
-   * of two nodes in a binary tree. */
-
-  lowestCommonAncestor(node1, node2) {
-    
   }
 }
+
 
 module.exports = { BinaryTree, BinaryTreeNode };
