@@ -67,13 +67,13 @@ class BinaryTree {
     let result = 0; //set result to 0
 
     function maxSumHelper(node){
-      if(node === null){ //if the node is null, return 0
+      if(node === null){     //if the node is null, return 0
         return 0;
       }
-      const leftSum = maxSumHelper(node.left); //recurse on the left child
-      const rightSum = maxSumHelper(node.right); //recurse on the right child
+      const leftSum = maxSumHelper(node.left);      //recurse on the left child
+      const rightSum = maxSumHelper(node.right);   //recurse on the right child
       result = Math.max(result , node.val + leftSum + rightSum);
-      return Math.max(0 , leftSum + node.val, rightSum + node.val); //return the maximum of the left and right child + node value
+      return Math.max(0 , leftSum + node.val, rightSum + node.val);    //return the maximum of the left and right child + node value
     }
 
     maxSumHelper(this.root); //call maxSumHelper on the root
@@ -88,15 +88,15 @@ class BinaryTree {
     if(!this.root){
       return 0;
     }
-    //We'll use BFS : breadth first search
+    //We'll use BFS : breadth-first search
     let queue = [this.root]; //create a queue and add the root to it
     let closest = null; //set closest to null
 
     while(queue.length > 0){ //while the queue is not empty
-      let currentNode = queue.shift(); //remove the first element from the queue
-      let currentVal = currentNode.val; //set currentVal to the value of the current node
-      let higherThanLowerBound = currentVal > lowerBound; //set higherThanLowerBound to true if the currentVal is greater than the lowerBound
-      let shouldReassignClosest = currentVal < closest || closest === null; //set shouldReassignClosest to true if the currentVal is less than closest or closest is null
+      let currentNode = queue.shift();       //remove the first element from the queue
+      let currentVal = currentNode.val;     //set currentVal to the value of the current node
+      let higherThanLowerBound = currentVal > lowerBound;      //set higherThanLowerBound to true if the currentVal is greater than the lowerBound
+      let shouldReassignClosest = currentVal < closest || closest === null;     //set shouldReassignClosest to true if the currentVal is less than closest or closest is null
 
       if(higherThanLowerBound && shouldReassignClosest){ //if higherThanLowerBound and shouldReassignClosest are true
         closest = currentVal;
