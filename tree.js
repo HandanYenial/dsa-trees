@@ -66,15 +66,15 @@ class Tree {
        return 0;
     }
     
-    let count = this.root.val > lowerBound ? 1 : 0; //if root value is greater than lowerBound, set count to 1, else 0
+    let count = this.root.val > lowerBound ? 1 : 0;     //if root value is greater than lowerBound, set count to 1, else 0
     function countEvensHelper(node){
       for(let child of node.children){ //loop through children
 
-        if (child.val > lowerBound)//if child value is greater than lowerBound
+        if (child.val > lowerBound)     //if child value is greater than lowerBound
           count++; //add to count
         
-        if(child.children.length > 0){ //if child has children
-          countEvens(child); //call countEvens function on child
+        if(child.children.length > 0){     //if child has children
+          countEvens(child);       //call countEvens function on child
         }
       }
     }
