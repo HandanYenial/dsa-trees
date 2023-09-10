@@ -21,16 +21,16 @@ class BinaryTree {
       return 0;
     }
     function minDepthHelper(node){ 
-      if(node.left === null && node.right === null){ // if the node is a leaf, return 1
+      if(node.left === null && node.right === null){    // if the node is a leaf, return 1
         return 1;
       }
-      if(node.left === null){ // if there is no left child, recurse on the right child
+      if(node.left === null){    // if there is no left child, recurse on the right child
         return 1 + minDepthHelper(node.right);
       }
-      if(node.right === null){ // if there is no right child, recurse on the left child
+      if(node.right === null){    // if there is no right child, recurse on the left child
         return 1 + minDepthHelper(node.left);
       }
-      return(Math.min(minDepthHelper(node.left) , minDepthHelper(node.right)) + 1); // return the minimum of the left and right child + 1
+      return(Math.min(minDepthHelper(node.left) , minDepthHelper(node.right)) + 1);   // return the minimum of the left and right child + 1
     }
     return minDepthHelper(this.root);
     
